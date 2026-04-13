@@ -129,28 +129,15 @@ const daycycledays = [
   "16/04/2026",
   "17/04/2026",
   "20/04/2026",
+  "21/04/2026",
   "22/04/2026",
   "23/04/2026",
   "27/04/2026",
   "28/04/2026",
   "29/04/2026",
   "30/04/2026",
-  "01/05/2026",
-  "04/05/2026",
-  "05/05/2026",
-  "06/05/2026",
-  "07/05/2026",
-  "08/05/2026",
-  "11/05/2026",
-  "12/05/2026",
-  "13/05/2026",
-  "14/05/2026",
-  "15/05/2026",
-  "18/05/2026",
-  "19/05/2026",
   "20/05/2026",
   "21/05/2026",
-  "22/05/2026",
 ];
 
 const starts = ["8:00", "9:00", "10:00", "11:20", "12:20"];
@@ -244,7 +231,7 @@ for (let i = 1; i <= 8; i++) {
   let subjectElement = document.querySelector(".row1 .block" + i);
   let subjectInput = document.querySelector(".row1 .block" + i + " input");
   let subjectBlock = Array.from(subjectElement.classList).filter(
-    (word) => word.slice(0, -1) == "block"
+    (word) => word.slice(0, -1) == "block",
   )[0];
   subjectInput.addEventListener("input", () => {
     if (manualFill.checked) return;
