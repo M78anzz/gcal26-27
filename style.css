@@ -1,23 +1,144 @@
-body {
-    background-color: #ffffff;
-    color: #000;
-    zoom: 87%;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+/* ===== Design tokens =====
+   Palette: warm paper background, ink-navy for headers/actions,
+   8 highlighter tones (one per rotation day) each paired with a
+   darker text color from the same hue for contrast.
+   Type: Space Grotesk for headings, system sans for body/inputs. */
+:root {
+    --paper: #f5f6f1;
+    --card: #ffffff;
+    --ink: #20242b;
+    --ink-soft: #5b6270;
+    --ink-muted: #8b9099;
+    --navy: #1b3a5c;
+    --navy-hover: #142c46;
+    --border: #dfe2d8;
+    --border-strong: #c3c8ba;
+    --radius: 10px;
+    --radius-lg: 16px;
+
+    --day1-bg: #ffe9a8; --day1-text: #7a5400; --day1-accent: #f2b705;
+    --day2-bg: #ffd3b0; --day2-text: #7a3b00; --day2-accent: #f2884b;
+    --day3-bg: #ffc2c2; --day3-text: #7a1e1e; --day3-accent: #f26d6d;
+    --day4-bg: #fbc8e6; --day4-text: #7a1f55; --day4-accent: #e85cb4;
+    --day5-bg: #e3c8fb; --day5-text: #4b1f7a; --day5-accent: #a85cf2;
+    --day6-bg: #c3d9fb; --day6-text: #12397a; --day6-accent: #5c8ff2;
+    --day7-bg: #bdefe6; --day7-text: #0b5c4e; --day7-accent: #23b39a;
+    --day8-bg: #d3f0b8; --day8-text: #355a0b; --day8-accent: #7ec23a;
 }
+
+body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.5;
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+}
+
+h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+#subtitle {
+    color: var(--ink-soft);
+}
+
+/* Buttons */
+#clear-all.btn {
+    background: var(--card);
+    color: var(--ink-soft);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+}
+#clear-all.btn:hover {
+    background: var(--paper);
+    color: var(--ink);
+}
+
+#download-ics.btn {
+    background: var(--navy);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.6em 1.6em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+#download-ics.btn:hover {
+    background: var(--navy-hover);
+}
+
+/* Timetable card */
 .table {
-    width: 90%;
+    width: 92%;
+    max-width: 1100px;
     margin: 0 auto;
     text-align: center;
-    color: #000;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25em 1em;
+    box-shadow: 0 1px 3px rgba(32, 36, 43, 0.06);
 }
+
+.row {
+    border-radius: var(--radius);
+}
+
 .row input {
     width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.4em 0.5em;
+    background: var(--card);
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .row input::placeholder {
     font-style: italic;
+    color: var(--ink-muted);
 }
+.row input:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 2px rgba(27, 58, 92, 0.15);
+}
+.row input:disabled {
+    background: var(--paper);
+    color: var(--ink-soft);
+    border-color: var(--border);
+    cursor: not-allowed;
+}
+
 .rowHead {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.6em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
 }
+.rowHead .col-1 {
+    border-radius: 8px;
+    padding: 0.35em 0.5em;
+}
+/* Day header pills - col-2 is the 1st child, so day headers start at nth-child(2) */
+.rowHead .col-1:nth-child(2) { background: var(--day1-bg); color: var(--day1-text); }
+.rowHead .col-1:nth-child(3) { background: var(--day2-bg); color: var(--day2-text); }
+.rowHead .col-1:nth-child(4) { background: var(--day3-bg); color: var(--day3-text); }
+.rowHead .col-1:nth-child(5) { background: var(--day4-bg); color: var(--day4-text); }
+.rowHead .col-1:nth-child(6) { background: var(--day5-bg); color: var(--day5-text); }
+.rowHead .col-1:nth-child(7) { background: var(--day6-bg); color: var(--day6-text); }
+.rowHead .col-1:nth-child(8) { background: var(--day7-bg); color: var(--day7-text); }
+.rowHead .col-1:nth-child(9) { background: var(--day8-bg); color: var(--day8-text); }
+
 .col-1 {
     min-width: 10%;
     overflow: clip;
@@ -29,7 +150,26 @@ body {
 }
 .block {
     text-align: left;
+    color: var(--ink-soft);
+    font-weight: 500;
 }
+
+/* Colored top edge running down each day's column, tying every
+   block back to its day's highlighter color from the header pill */
+.day1 { border-top: 3px solid var(--day1-accent); padding-top: 6px; }
+.day2 { border-top: 3px solid var(--day2-accent); padding-top: 6px; }
+.day3 { border-top: 3px solid var(--day3-accent); padding-top: 6px; }
+.day4 { border-top: 3px solid var(--day4-accent); padding-top: 6px; }
+.day5 { border-top: 3px solid var(--day5-accent); padding-top: 6px; }
+.day6 { border-top: 3px solid var(--day6-accent); padding-top: 6px; }
+.day7 { border-top: 3px solid var(--day7-accent); padding-top: 6px; }
+.day8 { border-top: 3px solid var(--day8-accent); padding-top: 6px; }
+.rowHead .day1, .rowHead .day2, .rowHead .day3, .rowHead .day4,
+.rowHead .day5, .rowHead .day6, .rowHead .day7, .rowHead .day8 {
+    border-top: none;
+    padding-top: 0.35em;
+}
+
 #submitContainer {
     display: flex;
     justify-content: center;
@@ -38,14 +178,41 @@ body {
 
 /* Preview table */
 #preview table {
-    width: 90%;
+    width: 92%;
+    max-width: 1100px;
     margin: 1em auto;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     text-align: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
 }
-#preview th, #preview td {
-    border: 1px solid #ccc;
-    padding: 4px;
+#preview th {
+    background: var(--navy);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 6px;
+}
+#preview td {
+    border-top: 1px solid var(--border);
+    padding: 6px;
+}
+#preview tr:nth-child(even) td {
+    background: var(--paper);
+}
+
+/* How-to-use section */
+[style*="margin-left: 2em"] ol {
+    color: var(--ink-soft);
+}
+[style*="margin-left: 2em"] ol li {
+    margin-bottom: 0.35em;
+}
+[style*="margin-left: 2em"] ol li::marker {
+    color: var(--navy);
+    font-weight: 600;
 }
 
 @media (max-width: 600px) {
@@ -61,72 +228,71 @@ body {
 }
 
 /* Summer item styling */
- .summer-item {
-            color: #FFA500; /* Bright orange for sun */
-            font-size: 2.5em;
-            font-family: Arial, sans-serif;
-            text-shadow: 0 0 5px #FFD700; /* Add a glowing effect */
-        }
-    
-        .summer-item, .summer-item .inner {
-            animation-iteration-count: infinite;
-            animation-play-state: running;
-        }
-    
-        @keyframes items-fall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(110vh); }
-        }
-    
-        @keyframes items-sway {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(50px); }
-        }
-    
-        .summer-item {
-            position: fixed;
-            top: -10%;
-            z-index: -1; /* Set to a lower value to be in the background */
-            -webkit-user-select: none;
-            user-select: none;
-            cursor: default;
-            animation-name: items-sway;
-            animation-duration: 3s;
-            animation-timing-function: ease-in-out;
-        }
-    
-        .summer-item .inner {
-            animation-duration: 10s;
-            animation-name: items-fall;
-            animation-timing-function: linear;
-        }
-    
-        /* Position and timing of each item */
-        .summer-item:nth-of-type(0) { left: 1%; animation-delay: 0s; }
-        .summer-item:nth-of-type(0) .inner { animation-delay: 0s; }
-    
-        .summer-item:nth-of-type(1) { left: 10%; animation-delay: 1s; }
-        .summer-item:nth-of-type(1) .inner { animation-delay: 1s; }
-    
-        .summer-item:nth-of-type(2) { left: 20%; animation-delay: 0.5s; }
-        .summer-item:nth-of-type(2) .inner { animation-delay: 6s; }
-    
-        .summer-item:nth-of-type(3) { left: 30%; animation-delay: 2s; }
-        .summer-item:nth-of-type(3) .inner { animation-delay: 4s; }
-    
-        .summer-item:nth-of-type(4) { left: 40%; animation-delay: 2s; }
-        .summer-item:nth-of-type(4) .inner { animation-delay: 2s; }
-    
-        .summer-item:nth-of-type(5) { left: 50%; animation-delay: 3s; }
-        .summer-item:nth-of-type(5) .inner { animation-delay: 8s; }
-    
-        .summer-item:nth-of-type(6) { left: 60%; animation-delay: 2s; }
-        .summer-item:nth-of-type(7) { left: 70%; animation-delay: 1s; }
-        .summer-item:nth-of-type(7) .inner { animation-delay: 2.5s; }
-    
-        .summer-item:nth-of-type(8) { left: 80%; animation-delay: 0s; }
-        .summer-item:nth-of-type(9) { left: 90%; animation-delay: 1.5s; }
-        .summer-item:nth-of-type(9) .inner { animation-delay: 3s; }
-    
-        .summer-item:nth-of-type(10) { left: 25%; animation-delay: 0s; }
-        .summer-item:nth-of-type(11) { left: 65%; animation-delay: 2.5s; }
+.summer-item {
+    color: #f2b705;
+    font-size: 2.5em;
+    font-family: Arial, sans-serif;
+    opacity: 0.55;
+}
+
+.summer-item, .summer-item .inner {
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+@keyframes items-fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(110vh); }
+}
+
+@keyframes items-sway {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(50px); }
+}
+
+.summer-item {
+    position: fixed;
+    top: -10%;
+    z-index: -1;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    animation-name: items-sway;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+}
+
+.summer-item .inner {
+    animation-duration: 10s;
+    animation-name: items-fall;
+    animation-timing-function: linear;
+}
+
+.summer-item:nth-of-type(0) { left: 1%; animation-delay: 0s; }
+.summer-item:nth-of-type(0) .inner { animation-delay: 0s; }
+
+.summer-item:nth-of-type(1) { left: 10%; animation-delay: 1s; }
+.summer-item:nth-of-type(1) .inner { animation-delay: 1s; }
+
+.summer-item:nth-of-type(2) { left: 20%; animation-delay: 0.5s; }
+.summer-item:nth-of-type(2) .inner { animation-delay: 6s; }
+
+.summer-item:nth-of-type(3) { left: 30%; animation-delay: 2s; }
+.summer-item:nth-of-type(3) .inner { animation-delay: 4s; }
+
+.summer-item:nth-of-type(4) { left: 40%; animation-delay: 2s; }
+.summer-item:nth-of-type(4) .inner { animation-delay: 2s; }
+
+.summer-item:nth-of-type(5) { left: 50%; animation-delay: 3s; }
+.summer-item:nth-of-type(5) .inner { animation-delay: 8s; }
+
+.summer-item:nth-of-type(6) { left: 60%; animation-delay: 2s; }
+.summer-item:nth-of-type(7) { left: 70%; animation-delay: 1s; }
+.summer-item:nth-of-type(7) .inner { animation-delay: 2.5s; }
+
+.summer-item:nth-of-type(8) { left: 80%; animation-delay: 0s; }
+.summer-item:nth-of-type(9) { left: 90%; animation-delay: 1.5s; }
+.summer-item:nth-of-type(9) .inner { animation-delay: 3s; }
+
+.summer-item:nth-of-type(10) { left: 25%; animation-delay: 0s; }
+.summer-item:nth-of-type(11) { left: 65%; animation-delay: 2.5s; }
