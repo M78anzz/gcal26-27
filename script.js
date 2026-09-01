@@ -170,6 +170,7 @@ const daycycle2026_27 = [
 
 const starts = ["8:00", "9:00", "10:00", "11:20", "12:20"];
 const ends = ["8:55", "9:55", "10:55", "12:15", "13:45"];
+const EVENT_TAG = "#TT26-27";
 const header = [
   "Subject",
   "Start Date",
@@ -311,6 +312,7 @@ document.querySelector("#download-ics").addEventListener("click", function () {
         ics.push("SUMMARY:" + subj);
         ics.push("DTSTART:" + dtStart);
         ics.push("DTEND:" + dtEnd);
+        ics.push("DESCRIPTION:" + EVENT_TAG);
         ics.push("END:VEVENT");
       }
     }
