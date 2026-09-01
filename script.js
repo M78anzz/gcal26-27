@@ -320,7 +320,7 @@ document.querySelector("#download-ics").addEventListener("click", function () {
 
   ics.push("END:VCALENDAR");
   var link = document.createElement("a");
-  link.href = "data:text/calendar;charset=utf-8," + encodeURI(ics.join("\r\n"));
+  link.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics.join("\r\n"));
   link.download = "schedule.ics";
   link.click();
 });
